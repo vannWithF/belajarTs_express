@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.getUserByUsername = exports.getAllUsers = exports.createUser = void 0;
 const userModels_1 = __importDefault(require("../models/userModels")); // Pastikan nama model sesuai
-// Menambahkan User baru
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userInstance = new userModels_1.default(req.body);
@@ -31,7 +30,6 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createUser = createUser;
-// Mengambil semua User
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield userModels_1.default.find();
@@ -47,12 +45,11 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllUsers = getAllUsers;
-// Mengambil User berdasarkan Username
 const getUserByUsername = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userInstance = yield userModels_1.default.findOne({ username: req.params.id });
         if (userInstance) {
-            res.status(200).json(userInstance); // 200 OK
+            res.status(200).json(userInstance);
         }
         else {
             res.status(404).json({ message: 'User not found' }); // 404 Not Found
@@ -68,7 +65,6 @@ const getUserByUsername = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getUserByUsername = getUserByUsername;
-// Menghapus User
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const deleteUserResponse = yield userModels_1.default.deleteOne({ username: req.params.id });
